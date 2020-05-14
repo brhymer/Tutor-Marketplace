@@ -23,6 +23,15 @@ def student_profile(request, student_id):
 
 
 # ==== TEACHER VIEWS
+# Teacher Private Profile
+def teacher_profile(request, teacher_id):
+    # get teacher from database by id
+    teacher = Teacher.objects.get(id=teacher_id)
+    template = 'teachers/profile.html'
+    context = {
+        'teacher': teacher,
+    }
+    return render(request, template, context)
 
 
 # ==== LESSON VIEWS
