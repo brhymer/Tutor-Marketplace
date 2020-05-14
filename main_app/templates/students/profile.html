@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Student Profile</h1>
+
+<h3>{{ student.full_name }}</h3>
+<!--Display lessons-->
+{% if student.lesson.count %}
+  {% for lesson in student.lesson.all %}
+    <!--Display lesson information-->
+    <h4>{{ lesson.name }}</h4>
+    <h4>Time:</h4> {{ lesson.time }}
+    <h4>Price:</h4> ${{ lesson.price }}
+  {% endfor %}
+{% else %}
+  <h4>No Lessons</h4>
+{% endif %}
+
+{% endblock %}
