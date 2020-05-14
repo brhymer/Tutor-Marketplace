@@ -9,12 +9,19 @@ LEVEL = (
 
 # Data Models
 
+class Subject(models.Model):
+    name = models.CharField(max_length =50)
+
+    def __str__(self):
+        return self.name
+
+
 class Teacher(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length =100)
     # Join table for what follows?
     # student = models.ManyToManyField(Student)
-    # subject = models.ManyToManyField(Subject)
+    subject = models.ForeignKey(Subject)
     # lesson = models.ManyToManyField(Lesson)
     level = models.CharField(
     'Level',
@@ -48,14 +55,5 @@ class Student(models.Model):
 
 #     def __str__(self):
 #         return self.name
-
-
-class Subject(models.Model):
-    name = models.CharField(max_length =50)
-    teachers = models.ManyToManyField(Teacher)
-
-    def __str__(self):
-        return self.name
-
 
 
