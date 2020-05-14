@@ -23,6 +23,11 @@ def student_profile(request, student_id):
 
 
 # ==== TEACHER VIEWS
+# Teacher Index Page - show all teachers
+def teacher_index(request):
+    # get all teachers 
+    pass
+
 # Teacher Private Profile
 def teacher_profile(request, teacher_id):
     # get teacher from database by id

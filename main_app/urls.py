@@ -10,6 +10,9 @@ urlpatterns = [
   path('students/<int:student_id>/', views.student_profile, name='student_profile'),
 
   # === Teacher URLs
+  # Teachers index page, shows all teachers
+  path('/teachers/', views.teacher_index, name='teacher_index'),  
+
   # Teacher private profile page
   path('teachers/<int:teacher_id>/', views.teacher_profile, name='teacher_profile'),
 
