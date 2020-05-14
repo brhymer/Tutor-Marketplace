@@ -2,25 +2,70 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tutor Marketplace</title>
   <!-- Bootstrap CSS here -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <!-- Main CSS -->
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
 </head>
+
 <body>
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <ul>
-          <li><a href="{% url 'home' %}" class="left brand-logo">Tutor Marketplace</a></li>
-        </ul>
+
+        <div class="jumbotron">
+          <div class="container text-center">
+            <h1><a href="{% url 'home' %}">Tutor Marketplace</a></h1>
+          </div>
+        </div>
+
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Deals</a></li>
+                <li><a href="#">Stores</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+
+        <!-- old nav bar -->
         <ul class="right">
           <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'language_index' %}">Languages</a></li>
+        </ul>
+        <ul class="right">
+          <li><a href="#">Teachers</a></li>
+        </ul>
+        <ul class="right">
+          <li><a href="#">Languages</a></li>
+        </ul>
+        <ul class="right">
+          <li><a href="#">Admin</a></li>
         </ul>
       </div>
     </nav>
@@ -29,10 +74,85 @@
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="page-footer">
-    <div class="right">All Rights Reserved, &copy; 2019 &nbsp;</div>
+
+  <!-- cards -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">LANGUAGE</div>
+          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
+              style="width:100%" alt="Image"></div>
+          <div class="panel-footer">Find teachers!</div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-danger">
+          <div class="panel-heading">LANGUAGE</div>
+          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
+              style="width:100%" alt="Image"></div>
+          <div class="panel-footer">Find teachers!</div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-success">
+          <div class="panel-heading">LANGUAGE</div>
+          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
+              style="width:100%" alt="Image"></div>
+          <div class="panel-footer">Find teachers!</div>
+        </div>
+      </div>
+    </div>
+  </div><br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">LANGUAGE</div>
+          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
+              style="width:100%" alt="Image"></div>
+          <div class="panel-footer">Find teachers!</div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">LANGUAGE</div>
+          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
+              style="width:100%" alt="Image"></div>
+          <div class="panel-footer">Find teachers!</div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">LANGUAGE</div>
+          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
+              style="width:100%" alt="Image"></div>
+          <div class="panel-footer">Find teachers!</div>
+        </div>
+      </div>
+    </div>
+  </div><br><br>
+
+
+  <footer class="container-fluid text-center">
+    <p>All Rights Reserved, &copy; 2019 &nbsp;</p>
+    <form class="form-inline">Sign up for updates:
+      <input type="email" class="form-control" size="50" placeholder="Email Address">
+      <button type="button" class="btn btn-danger">Sign Up</button>
+    </form>
   </footer>
 
- 
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
