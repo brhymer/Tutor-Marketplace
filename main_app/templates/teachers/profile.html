@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Teacher Profile Page</h1>
+<h2>{{ teacher.full_name }}</h2>
+<p>{{ teacher.language }}</p>
+<p>{{ teacher.bio }}</p>
+
+<!--Display Students-->
+<h3>Current Students</h3>
+{% if teacher.student.count %}
+  <ul>
+    {% for student in teacher.student.all %}
+      <li>{{ student.full_name }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <h4>No Students</h4>
+{% endif %}
+
+<!--Display Lessons-->
+<h3>Upcoming Lessons</h3>
+{% if teacher.lesson.count %}
+  <ul>
+    {% for lesson in teacher.lesson.all %}
+      <li>{{ lesson.name }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <h4>No Lessons</h4>
+{% endif %}
+
+{% endblock %}
