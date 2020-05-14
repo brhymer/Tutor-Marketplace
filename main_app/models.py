@@ -37,7 +37,7 @@ class Lesson(models.Model):
 class Student(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length =100)
-    lesson = models.ManyToManyField(Lesson)
+    lesson = models.ManyToManyField(Lesson, blank=True)
 
     def __str__(self):
         return self.full_name
@@ -47,9 +47,9 @@ class Teacher(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length =100)
     # Join table for what follows?
-    student = models.ManyToManyField(Student, null=True)
+    student = models.ManyToManyField(Student, null=True, blank=True)
     language = models.ForeignKey(Language, null=True, on_delete=models.SET_NULL)
-    lesson = models.ManyToManyField(Lesson, null =True)
+    lesson = models.ManyToManyField(Lesson, null =True, blank=True)
     bio = models.TextField(null=True, max_length = 250)
 
     def __str__(self):
