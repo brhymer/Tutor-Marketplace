@@ -7,7 +7,7 @@ urlpatterns = [
 
   # === Student URLs
   # Student profile page
-#   path('students/<int:student_id>/', views.student_profile, name='student_profile'),
+  path('students/<int:student_id>/', views.student_profile, name='student_profile'),
 
   # === Teacher URLs
 

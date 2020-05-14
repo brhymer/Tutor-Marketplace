@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-# TODO: change Subject to Language
-from .models import Subject, Student, Teacher
+from .models import Language, Student, Teacher
 
 def home(request):
     return render(request, 'home.html')
@@ -10,6 +9,17 @@ def about(request):
 
 
 # ==== STUDENT VIEWS
+# Student Private Profile
+def student_profile(request, student_id):
+    # get student from database by id
+    student = Student.objects.get(id=student_id)
+    # define template to render
+    template = 'students/profile.html'
+    # define context to pass to template
+    context = {
+        'student': student,
+    }
+    return render(request, template, context)
 
 
 # ==== TEACHER VIEWS
@@ -22,8 +32,7 @@ def about(request):
 # Language Index View
 def language_index(request):
     # get all languages from database
-    # TODO: change Subject to Language
-    languages = Subject.objects.all()
+    languages = Language.objects.all()
     template = 'languages/index.html'
     context = {
         'languages': languages,
