@@ -10,10 +10,12 @@ LEVEL = (
 # Data Models
 
 class Teacher(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length =100)
-    student = models.ManyToManyField(Student)
-    subject = models.ManyToManyField(Subject)
-    lesson = models.ManyToManyField(Lesson)
+    # Join table for what follows?
+    # student = models.ManyToManyField(Student)
+    # subject = models.ManyToManyField(Subject)
+    # lesson = models.ManyToManyField(Lesson)
     level = models.CharField(
     'Level',
     max_length=1,
@@ -25,30 +27,32 @@ class Teacher(models.Model):
 
 
 class Student(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length =100)
-    teacher = models.ManyToManyField(Teacher)
-    subject = models.ManyToManyField(Subject)
+    # Join table to link to teacher/lesson?
+    # teacher = models.ManyToManyField(Teacher)
 
     def __str__(self):
         return self.name
 
-class Lesson(models.Model):
-    name = models.CharField(max_length =50)
-    # The below: ForeignKey or ManyToManyField?
-    teacher = models.ManyToManyField(Teacher)
-    student = models.ManyToManyField(Student)
-    subject = models.ManyToManyField(Subject)
-    description = models.TextField(max_length = 250)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-    time = models.DateTimeField()
 
-    def __str__(self):
-        return self.name
+# Create Lesson as a join table?
+# class Lesson(models.Model):
+#     name = models.CharField(max_length =50)
+#     teacher = models.ManyToManyField(Teacher)
+#     student = models.ManyToManyField(Student)
+#     subject = models.ManyToManyField(Subject)
+#     description = models.TextField(max_length = 250)
+#     price = models.DecimalField(max_digits=6, decimal_places=2)
+#     time = models.DateTimeField()
+
+#     def __str__(self):
+#         return self.name
 
 
 class Subject(models.Model):
     name = models.CharField(max_length =50)
-    teacher = models.ForeignKey(Teacher)
+    teachers = models.ManyToManyField(Teacher)
 
     def __str__(self):
         return self.name
