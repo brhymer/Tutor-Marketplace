@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Languages Index</h1>
+<!--display all languages-->
+{% if languages.count %}
+  {% for language in languages.all %}
+  <div>
+    <h3>{{ language.name }}</h3>
+  </div>
+  {% endfor %}
+{% else %}
+  <h3>No Languages</h3>
+{% endif %}
+
+{% endblock %}
