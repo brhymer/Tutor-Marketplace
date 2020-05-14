@@ -16,4 +16,8 @@ urlpatterns = [
   # === Language URLs
   path('languages/', views.language_index, name='language_index'),
 
+
+  # === Auth URLs
+  path('accounts/signup/', views.signup, name='signup'),
+
 ]

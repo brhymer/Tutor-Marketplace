@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Language, Student, Teacher
 
+# Auth
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+
 def home(request):
     return render(request, 'home.html')
 
@@ -39,3 +44,23 @@ def language_index(request):
     }
     # render template
     return render(request, template, context)
+
+
+
+# ====AUTH VIEWS
+# Signup
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('language_index')
+    else:
+        form = UserCreationForm()
+        context = {
+            'error': error_message,
+            'form': form,
+        }
+        return render(request, 'registration/signup.html', context)
