@@ -5,6 +5,8 @@
 <h2>{{ teacher.full_name }}</h2>
 <p>{{ teacher.bio }}</p>
 <h3>Lessons</h3>
-
+{% for lesson in lessons %}
+<p>{{lesson.name}}</p> 
+{% endfor %}
 
 {% endblock %}

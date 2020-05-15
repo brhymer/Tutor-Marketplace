@@ -43,9 +43,11 @@ def teacher_index(request):
 def teacher_profile(request, teacher_id):
     # get teacher from database by id
     teacher = Teacher.objects.get(id=teacher_id)
+    lessons = Lesson.objects.filter(teacher_id=teacher_id)
     template = 'teachers/profile.html'
     context = {
         'teacher': teacher,
+        'lessons': lessons,
     }
     return render(request, template, context)
 
@@ -53,9 +55,11 @@ def teacher_profile(request, teacher_id):
 def teacher_details(request, teacher_id):
     # get teacher by id
     teacher = Teacher.objects.get(id=teacher_id)
+    lessons = Lesson.objects.filter(teacher_id=teacher_id)
     template = 'teachers/details.html'
     context = {
         'teacher': teacher,
+        'lessons': lessons,
     }
     return render(request, template, context)
 
