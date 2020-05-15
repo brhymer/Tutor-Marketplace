@@ -31,7 +31,12 @@ def student_profile(request, student_id):
 # Teacher Index Page - show all teachers
 def teacher_index(request):
     # get all teachers 
-    pass
+    teachers = Teacher.objects.all()
+    template = 'teachers/index.html'
+    context = {
+        'teachers': teachers,
+    }
+    return render(request, template, context)
 
 # Teacher Private Profile
 def teacher_profile(request, teacher_id):
