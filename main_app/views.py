@@ -28,6 +28,16 @@ def student_profile(request, student_id):
 
 
 # ==== TEACHER VIEWS
+# Teacher Index Page - show all teachers
+def teacher_index(request):
+    # get all teachers 
+    teachers = Teacher.objects.all()
+    template = 'teachers/index.html'
+    context = {
+        'teachers': teachers,
+    }
+    return render(request, template, context)
+
 # Teacher Private Profile
 def teacher_profile(request, teacher_id):
     # get teacher from database by id
