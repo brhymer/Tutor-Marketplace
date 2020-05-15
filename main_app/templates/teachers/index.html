@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Teachers Index</h1>
+{% if teachers.count %}
+  {% for teacher in teachers %}
+    <h3>{{ teacher.full_name }}</h3>
+    <p>Language: {{ teacher.language }}</p>
+    <p>{{ teacher.bio }}</p>
+
+  {% endfor %}
+{% else %}
+  <h3>No Teachers</h3>
+{% endif %}
+
+{% endblock %}
