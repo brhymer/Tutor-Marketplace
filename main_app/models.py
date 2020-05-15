@@ -22,7 +22,7 @@ class Lesson(models.Model):
     description = models.TextField(max_length = 250)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     time = models.DateTimeField()
-    language = models.ManyToManyField(Language)
+    language = models.ForeignKey(Language, null=True, on_delete=models.SET_NULL)
     level = models.CharField(
     'Level',
     max_length=1,
