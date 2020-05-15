@@ -7,6 +7,7 @@
     <h3>{{ teacher.full_name }}</h3>
     <p>Language: {{ teacher.language }}</p>
     <p>{{ teacher.bio }}</p>
+    <a href="{% url 'teacher_details' teacher.id %}">View</a>
 
   {% endfor %}
 {% else %}

@@ -49,6 +49,16 @@ def teacher_profile(request, teacher_id):
     }
     return render(request, template, context)
 
+# Teacher Public Profile
+def teacher_details(request, teacher_id):
+    # get teacher by id
+    teacher = Teacher.objects.get(id=teacher_id)
+    template = 'teachers/details.html'
+    context = {
+        'teacher': teacher,
+    }
+    return render(request, template, context)
+
 def teachers_filtered(request, language_id):
     # get all teachers for the given language
     teachers = Teacher.objects.filter(language_id=language_id)
@@ -61,6 +71,17 @@ def teachers_filtered(request, language_id):
     return render(request, template, context)
 
 
+# ==== LESSON VIEWS
+def lesson_index(request, language_id):
+    # get all lessons in the given language
+    language = Language.objects.get(id=language_id)
+    lessons = Lesson.objects.filter(language_id=language_id)
+    template = 'lessons/index.html'
+    context = {
+        'lessons': lessons,
+        'language': language,
+    }
+    return render(request, template, context)
 
 # NEW Lesson
 def new_lesson(request):
@@ -76,18 +97,6 @@ def new_lesson(request):
     context = { 'form': form }
     return render(request, template, context)
 
-
-# ==== LESSON VIEWS
-def lesson_index(request, language_id):
-    # get all lessons in the given language
-    language = Language.objects.get(id=language_id)
-    lessons = Lesson.objects.filter(language_id=language_id)
-    template = 'lessons/index.html'
-    context = {
-        'lessons': lessons,
-        'language': language,
-    }
-    return render(request, template, context)
 
 # ==== LANGUAGE VIEWS
 # Language Index View
