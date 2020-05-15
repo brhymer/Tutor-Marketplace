@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Language, Student, Teacher, Lesson
+from .forms import LessonForm
 
 # Auth
 from django.contrib.auth.forms import UserCreationForm
@@ -46,6 +47,21 @@ def teacher_profile(request, teacher_id):
     context = {
         'teacher': teacher,
     }
+    return render(request, template, context)
+
+
+# NEW Lesson
+def new_lesson(request):
+  if request.method == 'POST':
+    form = LessonForm(request.POST)
+    if form.is_valid():
+      lesson = form.save()
+    # TODO: update redirect
+      return redirect('teacher_index')
+  else:
+    form = LessonForm()
+    template = 'lessons/new.html'
+    context = { 'form': form }
     return render(request, template, context)
 
 
