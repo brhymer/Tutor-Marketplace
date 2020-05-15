@@ -8,7 +8,17 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
 def home(request):
-    return render(request, 'home.html')
+    # get all languages from database
+    languages = Language.objects.all()
+    template = 'home.html'
+    # define a range to loop over in the template
+    # use to show 4 teachers in each language
+    loop_range = range(0, 4)
+    context = {
+        'languages': languages,
+        'range': loop_range,
+    }
+    return render(request, template, context)
 
 def about(request):
     return render(request, 'about.html')
