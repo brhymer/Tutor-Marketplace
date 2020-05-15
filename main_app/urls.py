@@ -19,7 +19,10 @@ urlpatterns = [
   # Filter teachers by language
   path('languages/<int:language_id>/teachers/', views.teachers_filtered, name="teachers_filtered"),
 
-  # === Lesson Booking URLs
+  # === Lesson URLs
+   # New Lesson
+  path('lessons/new', views.new_lesson, name='new_lesson'),
+  
   # Available lessons in the given language
   path('languages/<int:language_id>/lessons/', views.lesson_index, name="lesson_index"),
 
