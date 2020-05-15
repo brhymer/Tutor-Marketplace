@@ -16,12 +16,15 @@ urlpatterns = [
   # Teacher private profile page
   path('teachers/<int:teacher_id>/', views.teacher_profile, name='teacher_profile'),
 
-  # New Lesson
-  path('lessons/new', views.new_lesson, name='new_lesson'),
+  # Filter teachers by language
+  path('languages/<int:language_id>/teachers/', views.teachers_filtered, name="teachers_filtered"),
 
-  # === Lesson Booking URLs
+  # === Lesson URLs
+   # New Lesson
+  path('lessons/new', views.new_lesson, name='new_lesson'),
+  
   # Available lessons in the given language
-  path('languages/<int:language_id>/lessons', views.lesson_index, name="lesson_index"),
+  path('languages/<int:language_id>/lessons/', views.lesson_index, name="lesson_index"),
 
   # === Language URLs
   path('languages/', views.language_index, name='language_index'),

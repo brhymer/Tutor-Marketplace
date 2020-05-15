@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <!-- Main CSS -->
-  <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
@@ -20,33 +20,28 @@
     <nav>
       <div class="nav-wrapper">
 
-        <div class="jumbotron">
+        <!-- <div class="jumbotron">
           <div class="container text-center">
             <h1><a href="{% url 'home' %}">Tutor Marketplace</a></h1>
           </div>
-        </div>
+        </div> -->
 
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar fixed-top navbar-expand-md navbar-inverse bg-light">
           <div class="container-fluid">
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+              <a class="navbar-brand" href="{% url 'home' %}">Tutor Marketplace</a>
+
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"               aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
               </button>
-              <a class="navbar-brand" href="#">Logo</a>
             </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Deals</a></li>
-                <li><a href="#">Stores</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+            <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
+              <ul class="nav navbar-nav ml-auto">
+                <li><a href="{% url 'language_index' %}">Languages</a></li>
+                <li><a href="{% url 'teacher_index' %}">Teachers</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a href="/admin/">Admin</a></li>
               </ul>
             </div>
           </div>
@@ -54,7 +49,7 @@
 
 
         <!-- old nav bar -->
-        <ul class="right">
+        <!-- <ul class="right">
           <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'language_index' %}">Languages</a></li>
         </ul>
@@ -66,7 +61,7 @@
         </ul>
         <ul class="right">
           <li><a href="#">Admin</a></li>
-        </ul>
+        </ul> -->
       </div>
     </nav>
   </header>
@@ -75,72 +70,10 @@
     {% endblock %}
   </main>
 
-  <!-- cards -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="panel panel-primary">
-          <div class="panel-heading">LANGUAGE</div>
-          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
-              style="width:100%" alt="Image"></div>
-          <div class="panel-footer">Find teachers!</div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="panel panel-danger">
-          <div class="panel-heading">LANGUAGE</div>
-          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
-              style="width:100%" alt="Image"></div>
-          <div class="panel-footer">Find teachers!</div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="panel panel-success">
-          <div class="panel-heading">LANGUAGE</div>
-          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
-              style="width:100%" alt="Image"></div>
-          <div class="panel-footer">Find teachers!</div>
-        </div>
-      </div>
-    </div>
-  </div><br>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="panel panel-primary">
-          <div class="panel-heading">LANGUAGE</div>
-          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
-              style="width:100%" alt="Image"></div>
-          <div class="panel-footer">Find teachers!</div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="panel panel-primary">
-          <div class="panel-heading">LANGUAGE</div>
-          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
-              style="width:100%" alt="Image"></div>
-          <div class="panel-footer">Find teachers!</div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="panel panel-primary">
-          <div class="panel-heading">LANGUAGE</div>
-          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
-              style="width:100%" alt="Image"></div>
-          <div class="panel-footer">Find teachers!</div>
-        </div>
-      </div>
-    </div>
-  </div><br><br>
-
+<br/>
 
   <footer class="container-fluid text-center">
-    <p>All Rights Reserved, &copy; 2019 &nbsp;</p>
-    <form class="form-inline">Sign up for updates:
-      <input type="email" class="form-control" size="50" placeholder="Email Address">
-      <button type="button" class="btn btn-danger">Sign Up</button>
-    </form>
+    <p>All Rights Reserved, &copy; 2020 &nbsp;</p>
   </footer>
 
 
