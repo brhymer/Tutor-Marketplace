@@ -37,7 +37,7 @@
             </div>
             <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
               <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item"><a href="{% url 'language_index' %}">Languages</a>&nbsp;&nbsp;</li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'language_index' %}">Languages</a>&nbsp;&nbsp;</li>
                 {% if user.is_authenticated %}
                   <li class="nav-item"><a class="nav-link" href="{% url 'teacher_index' %}">Teachers</a>&nbsp;&nbsp;</li>
                   <li class="nav-item"><a class="nav-link" href="{% url 'student_profile' user.id %}">My Profile</a>&nbsp;&nbsp;</li>
