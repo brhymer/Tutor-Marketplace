@@ -9,8 +9,19 @@
 
 <form method="post" action="{% url 'signup' %}">
   {% csrf_token %}
+  <!--Full Name-->
+  <label for="full_name">Full Name</label>
+  <input type="text" id="full_name" name="full_name">
   {{ form.as_p }}
-  <input type="submit" class="btn" value="signup">
+  <!--Radio button for Student-->
+  <input type="radio" name="student" value="student">
+  <label for="student">Student</label>
+  <!--Radio button for Teacher-->
+  <input type="radio" name="teacher" value="teacher">
+  <label for="teacher">Teacher</label>
+  <!--Submit-->
+  <br/>
+  <input type="submit" class="btn btn-primary" value="Sign Up">
 </form>
 
 {% endblock %}
