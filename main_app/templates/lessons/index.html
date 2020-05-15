@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Available Lessons </h1>
+{% if lessons.count %}
+  {% for lesson in lessons %}
+    <div>    
+        <h3>{{ lesson.name }}</h3>
+        <h5>Time: {{lesson.time}}</h5>
+    </div>
+
+  {% endfor %}
+{% else %}
+  <h3>No lessons</h3>
+{% endif %}
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Language, Student, Teacher
+from .models import Language, Student, Teacher, Lesson
 
 # Auth
 from django.contrib.auth.forms import UserCreationForm
@@ -50,7 +50,14 @@ def teacher_profile(request, teacher_id):
 
 
 # ==== LESSON VIEWS
-
+def lesson_index(request, language_id):
+    # get all lessons in the given language
+    lessons = Lesson.objects.filter(id=language_id)
+    template = 'lessons/index.html'
+    context = {
+        'lessons': lessons,
+    }
+    return render(request, template, context)
 
 # ==== LANGUAGE VIEWS
 # Language Index View
