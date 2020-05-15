@@ -8,23 +8,31 @@
     </div>
     <!--TODO: fill out action and method-->
     <div>
-      <form class="form-inline" action="#"> Search for Teachers by Language:
-        <input type="email" class="form-control" size="50" placeholder="Email Address">
-        <button type="button" class="btn btn-danger">Sign Up</button>
+      <form class="form-group" action="#"> Search for Teachers by Language:
+        <input type="text" class="form-control" size="50" placeholder="ex. English">
+        <button type="button" class="btn btn-danger">Search</button>
       </form>
     </div>
-
+    <!--Language and 3 random teachers-->
+  
   <div class="container">
+    {% for language in languages %}
+    <h3>{{ language.name }}</h3>
     <div class="row">
-      <div class="col-sm-4">
+      {% for i in range %}
+      {% if i <= language.teacher_set.count %}
+      <div class="col-md-3">
         <div class="panel panel-primary">
-          <div class="panel-heading">LANGUAGE</div>
+          <div class="panel-heading">Teacher Name</div>
           <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
               style="width:100%" alt="Image"></div>
-          <div class="panel-footer">Find teachers!</div>
+          <div class="panel-footer">Book Now!</div>
         </div>
       </div>
+      {% endif %}
+      {% endfor %}
     </div>
+    {% endfor %}
   </div>
 
 {% endblock %}
