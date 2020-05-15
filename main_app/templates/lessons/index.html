@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Available Lessons </h1>
+<h1>Available Lessons in {{language.name}}</h1>
+
 {% if lessons.count %}
+
   {% for lesson in lessons %}
     <div>    
         <h3>{{ lesson.name }}</h3>
-        <h5>Time: {{lesson.time}}</h5>
+        <h5>Time: {{lesson.time}}  Price: {{lesson.price}}</h5>
+        
     </div>
 
   {% endfor %}
