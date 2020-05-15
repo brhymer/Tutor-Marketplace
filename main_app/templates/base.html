@@ -38,11 +38,23 @@
             <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="{% url 'language_index' %}">Languages</a></li>
-                {% if user.is_authenticated %}
+                <!--Student Links-->
+                {% if user.is_authenticated and user.student_set.count != 0 %}
+                  <!--Teachers Index-->
                   <li class="nav-item"><a class="nav-link" href="{% url 'teacher_index' %}">Teachers</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{% url 'student_profile' user.id %}">My Profile</a></li>
+                  <!--Student Profile-->
+                  <li class="nav-item"><a class="nav-link" href="{% url 'student_profile' user.student_set.first.id %}">My Profile</a></li>
+                  <!--Log Out-->
                   <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-                  {% else %}
+                <!--Teacher Links-->
+                {% elif user.is_authenticated and user.teacher_set.count != 0 %}
+                  <!--New Lesson-->
+                  <li class="nav-item"><a class="nav-link" href="{% url 'new_lesson' %}">New Lesson</a></li>
+                  <!--Teacher Private Profile-->
+                  <li class="nav-item"><a class="nav-link" href="{% url 'teacher_profile' user.teacher_set.first.id %}">My Profile</a></li>
+                  <!--Log Out-->
+                  <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
                   <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                   <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
                 {% endif %}
