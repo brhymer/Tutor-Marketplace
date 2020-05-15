@@ -111,7 +111,6 @@ def language_index(request):
     return render(request, template, context)
 
 
-
 # ====AUTH VIEWS
 # Signup
 def signup(request):
@@ -120,7 +119,17 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # get full name from form
+            form_full_name = request.POST['full_name']
+            if request.POST.get('student'):
+                # create a Student instance
+                user.student_set.create(full_name=form_full_name)
+            elif request.POST.get('teacher'):
+                # create a Teacher instance
+                user.teacher_set.create(full_name=form_full_name)
+            user.save()
             login(request, user)
+            # TODO: redirect teachers to fill out their bio
             return redirect('language_index')
     else:
         form = UserCreationForm()
