@@ -37,16 +37,16 @@
             </div>
             <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
               <ul class="nav navbar-nav ml-auto">
-                <li><a href="{% url 'language_index' %}">Languages</a>&nbsp;&nbsp;</li>
+                <li class="nav-item"><a href="{% url 'language_index' %}">Languages</a>&nbsp;&nbsp;</li>
                 {% if user.is_authenticated %}
-                  <li><a href="{% url 'teacher_index' %}">Teachers</a>&nbsp;&nbsp;</li>
-                  <li><a href="{% url 'student_profile' user.id %}">My Profile</a>&nbsp;&nbsp;</li>
-                  <li><a href="{% url 'logout' %}">Logout</a>&nbsp;&nbsp;</li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'teacher_index' %}">Teachers</a>&nbsp;&nbsp;</li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'student_profile' user.id %}">My Profile</a>&nbsp;&nbsp;</li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a>&nbsp;&nbsp;</li>
                   {% else %}
-                  <li><a href="{% url 'login' %}">Login</a>&nbsp;&nbsp;</li>
-                  <li><a href="{% url 'signup' %}">Sign Up</a>&nbsp;&nbsp;</li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a>&nbsp;&nbsp;</li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a>&nbsp;&nbsp;</li>
                 {% endif %}
-                <li><a href="/admin/">Admin</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/">Admin</a></li>
               </ul>
             </div>
           </div>
