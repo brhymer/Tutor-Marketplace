@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <!-- Main CSS -->
-  <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
@@ -26,27 +26,22 @@
           </div>
         </div> -->
 
-        <nav class="navbar navbar-expand-md navbar-inverse">
+        <nav class="navbar fixed-top navbar-expand-md navbar-inverse bg-light">
           <div class="container-fluid">
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+              <a class="navbar-brand" href="{% url 'home' %}">Tutor Marketplace</a>
+
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"               aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
               </button>
-              <a class="navbar-brand" href="#">Tutor Marketplace</a>
             </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Deals</a></li>
-                <li><a href="#">Stores</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+            <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
+              <ul class="nav navbar-nav ml-auto">
+                <li><a href="{% url 'language_index' %}">Languages</a></li>
+                <li><a href="{% url 'teacher_index' %}">Teachers</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a href="/admin/">Admin</a></li>
               </ul>
             </div>
           </div>
