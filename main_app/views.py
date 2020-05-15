@@ -51,7 +51,13 @@ def teacher_profile(request, teacher_id):
 
 # Teacher Public Profile
 def teacher_details(request, teacher_id):
-    pass
+    # get teacher by id
+    teacher = Teacher.objects.get(id=teacher_id)
+    template = 'teachers/details.html'
+    context = {
+        'teacher': teacher,
+    }
+    return render(request, template, context)
 
 def teachers_filtered(request, language_id):
     # get all teachers for the given language
