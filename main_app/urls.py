@@ -18,7 +18,7 @@ urlpatterns = [
 
   # === Lesson Booking URLs
   # Available lessons in the given language
-  path('languages/<int:language_id>/lessons', views.lesson_index, name="lesson_index"),
+  path('languages/<int:language_id>/lessons/', views.lesson_index, name="lesson_index"),
 
   # === Language URLs
   path('languages/', views.language_index, name='language_index'),
