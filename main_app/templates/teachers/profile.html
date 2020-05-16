@@ -30,6 +30,8 @@
         <li>${{ lesson.price }}</li>
         <li>{{ lesson.time }}</li>
       </ul>
+      <!--Delete Lesson Link-->
+      <a href="{% url 'delete_lesson' lesson.id %}">Delete Lesson</a>
     {% endfor %}
 {% else %}
   <h4>No Lessons</h4>
