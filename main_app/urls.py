@@ -28,6 +28,9 @@ urlpatterns = [
   # === Lesson URLs
    # New Lesson
   path('lessons/new', views.new_lesson, name='new_lesson'),
+
+  # Delete Lesson
+  path('lessons/<int:lesson_id>/delete', views.delete_lesson, name='delete_lesson'),
   
   # Available lessons in the given language
   path('languages/<int:language_id>/lessons/', views.lesson_index, name="lesson_index"),
