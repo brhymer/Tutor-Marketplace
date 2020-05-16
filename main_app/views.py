@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Language, Student, Teacher, Lesson
-from .forms import LessonForm
+from .forms import LessonForm, TeacherForm
 
 # Auth
 from django.contrib.auth.forms import UserCreationForm
@@ -73,6 +73,27 @@ def teacher_details(request, teacher_id):
     }
     return render(request, template, context)
 
+# Edit Teacher Public Profile
+def teacher_edit(request, teacher_id):
+    # get teacher from the database
+    teacher = Teacher.objects.get(id=teacher_id)
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, instance=teacher)
+        # update exisiting teacher
+        if form.is_valid():
+            teacher = form.save()
+            return redirect('teacher_details', teacher_id=teacher.id)
+    else:
+        # send a form pre-populated with teacher's values
+        form = TeacherForm(instance=teacher)
+        template = 'teachers/edit.html'
+        context = {
+            'form': form,
+            'teacher': teacher,
+        }
+        return render(request, template, context)
+
+
 def teachers_filtered(request, language_id):
     # get all teachers for the given language
     teachers = Teacher.objects.filter(language_id=language_id)
@@ -101,25 +122,31 @@ def lesson_index(request, language_id):
 def new_lesson(request):
     # get current logged in user
     user = request.user
-    # get teacher id from current user
-    # TODO: check that user is actually teacher
-    teacher_id = user.teacher_set.first().id
-    # get teacher from database
-    teacher = Teacher.objects.get(id=teacher_id)
-    if request.method == 'POST':
-        form = LessonForm(request.POST)
-        if form.is_valid():
-            lesson = form.save()
-            # save the teacher to newly made lesson
-            lesson.teacher = teacher
-            lesson.save()
-        # redirect to teacher's profile
-        return redirect('teacher_profile', teacher_id=teacher_id)
+    # check if user is a teacher
+    if user.teacher_set.count() != 0:
+        # get teacher id from current user
+        teacher_id = user.teacher_set.first().id
+        # get teacher from database
+        teacher = Teacher.objects.get(id=teacher_id)
+        if request.method == 'POST':
+            form = LessonForm(request.POST)
+            if form.is_valid():
+                lesson = form.save()
+                # save the teacher to newly made lesson
+                lesson.teacher = teacher
+                lesson.save()
+            # redirect to teacher's profile
+            return redirect('teacher_profile', teacher_id=teacher_id)
+        else:
+            form = LessonForm()
+            template = 'lessons/new.html'
+            context = { 'form': form }
+            return render(request, template, context)
     else:
-        form = LessonForm()
-        template = 'lessons/new.html'
-        context = { 'form': form }
-        return render(request, template, context)
+        # user is a teacher, doesn't have permissions
+        student_id = user.student_set.first().id
+        # redirect to student's profile page
+        return redirect('student_profile', student_id=student_id)
 
 
 # ==== LANGUAGE VIEWS

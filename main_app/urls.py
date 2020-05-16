@@ -19,6 +19,9 @@ urlpatterns = [
   # Teacher public profile page
   path('teachers/<int:teacher_id>/details/', views.teacher_details, name='teacher_details'),
 
+  # Edit Teacher public profile page
+  path('teachers/<int:teacher_id>/edit/', views.teacher_edit, name='teacher_edit'),
+
   # Filter teachers by language
   path('languages/<int:language_id>/teachers/', views.teachers_filtered, name="teachers_filtered"),
 

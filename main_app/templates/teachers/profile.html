@@ -6,6 +6,9 @@
 <p>{{ teacher.language }}</p>
 <p>{{ teacher.bio }}</p>
 
+<!--Edit Public Profile Link-->
+<a href="{% url 'teacher_edit' teacher.id %}">Edit Public Profile</a>
+
 <!--Display Students-->
 <h3>Current Students</h3>
 {% if teacher.student.count %}
