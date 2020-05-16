@@ -6,7 +6,8 @@
 <p>{{ teacher.bio }}</p>
 <h3>Lessons</h3>
 {% for lesson in lessons %}
-<p>{{lesson.name}}</p> 
+<p>{{lesson.name}} &nbsp;
+<input type="btn" class="btn btn-danger" action="submit" value="Book this class"></p> 
 {% endfor %}
 
 {% endblock %}
