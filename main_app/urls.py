@@ -36,6 +36,7 @@ urlpatterns = [
   path('lessons/<int:lesson_id>/book/', views.make_booking, name='make_booking'),
 
   # Cancel a Lesson Booking
+  path('lessons/<int:lesson_id>/cancel/', views.cancel_booking, name='cancel_booking'),
   
   # Available lessons in the given language
   path('languages/<int:language_id>/lessons/', views.lesson_index, name="lesson_index"),

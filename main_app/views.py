@@ -177,6 +177,19 @@ def make_booking(request, lesson_id):
     # make sure only one student can book the lesson?
     # redirect to student's profile page
     return redirect('student_profile', student_id=student.id)
+    
+# Cancel a Lesson
+def cancel_booking(request, lesson_id):
+    # get lesson from database
+    lesson = Lesson.objects.get(id=lesson_id)
+    # get the student from the currently logged in user
+    user = request.user
+    student = user.student_set.first()
+    # remove lesson from student's lesson, but don't delete lesson
+    student.lesson.remove(lesson)
+    # redirect to student's profile
+    return redirect('student_profile', student_id=student.id)
+    # TODO: teacher's version of cancel? maybe?
 
 
 # ==== LANGUAGE VIEWS
