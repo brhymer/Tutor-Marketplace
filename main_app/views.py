@@ -134,6 +134,8 @@ def new_lesson(request):
                 lesson = form.save()
                 # save the teacher to newly made lesson
                 lesson.teacher = teacher
+                # TODO: save language to lesson
+                lesson.language = teacher.language
                 lesson.save()
             # redirect to teacher's profile
             return redirect('teacher_profile', teacher_id=teacher_id)
@@ -147,6 +149,18 @@ def new_lesson(request):
         student_id = user.student_set.first().id
         # redirect to student's profile page
         return redirect('student_profile', student_id=student_id)
+
+# Delete Lesson
+def delete_lesson(request, lesson_id):
+    # get lesson to delete from database
+    lesson = Lesson.objects.get(id=lesson_id)
+    # delete from database
+    lesson.delete()
+    # get teacher id from current user that's logged in
+    user = request.user
+    teacher_id = user.teacher_set.first().id
+    # redirect to teacher's private profile
+    return redirect('teacher_profile', teacher_id=teacher_id)
 
 
 # ==== LANGUAGE VIEWS
