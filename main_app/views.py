@@ -99,17 +99,27 @@ def lesson_index(request, language_id):
 
 # NEW Lesson
 def new_lesson(request):
-  if request.method == 'POST':
-    form = LessonForm(request.POST)
-    if form.is_valid():
-      lesson = form.save()
-    # TODO: update redirect
-      return redirect('teacher_index')
-  else:
-    form = LessonForm()
-    template = 'lessons/new.html'
-    context = { 'form': form }
-    return render(request, template, context)
+    # get current logged in user
+    user = request.user
+    # get teacher id from current user
+    # TODO: check that user is actually teacher
+    teacher_id = user.teacher_set.first().id
+    # get teacher from database
+    teacher = Teacher.objects.get(id=teacher_id)
+    if request.method == 'POST':
+        form = LessonForm(request.POST)
+        if form.is_valid():
+            lesson = form.save()
+            # save the teacher to newly made lesson
+            lesson.teacher = teacher
+            lesson.save()
+        # redirect to teacher's profile
+        return redirect('teacher_profile', teacher_id=teacher_id)
+    else:
+        form = LessonForm()
+        template = 'lessons/new.html'
+        context = { 'form': form }
+        return render(request, template, context)
 
 
 # ==== LANGUAGE VIEWS
