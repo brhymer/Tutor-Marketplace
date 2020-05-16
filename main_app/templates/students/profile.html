@@ -13,6 +13,8 @@
     <h5>Teacher: {{ lesson.teacher.full_name }} </h5>
     <h5>Time: {{ lesson.time }} </h5>
     <h5>Price: ${{ lesson.price }} </h5>
+    <!--Cancel Lesson Link-->
+    <a href="{% url 'cancel_booking' lesson.id %}">Cancel Lesson</a>
     <hr>
   {% endfor %}
 {% else %}
