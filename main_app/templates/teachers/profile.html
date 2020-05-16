@@ -21,13 +21,13 @@
 <!--Display Lessons-->
 <h3>Upcoming Lessons</h3>
 {% if lessons.count %}
-  <ul>
     {% for lesson in lessons %}
-      <li>{{ lesson.name }}</li>
-      <li>{{ lesson.price }}</li>
-      <li>{{ lesson.time }}</li>
+      <h4>{{ lesson.name }}</h4>
+      <ul>
+        <li>${{ lesson.price }}</li>
+        <li>{{ lesson.time }}</li>
+      </ul>
     {% endfor %}
-  </ul>
 {% else %}
   <h4>No Lessons</h4>
 {% endif %}
