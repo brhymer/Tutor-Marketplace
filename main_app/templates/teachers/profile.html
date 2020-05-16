@@ -20,10 +20,25 @@
 {% else %}
   <h4>No Students</h4>
 {% endif %}
+<hr>
 
 <!--Display Lessons-->
-<h3>Upcoming Lessons</h3>
+
 {% if lessons.count %}
+    <!--Booked Upcoming Lessons-->
+    <h3>Booked Lessons</h3>
+    {% for lesson in lessons %}
+      {% if lesson.student_set.count != 0 %}
+        <h4>Lesson name: {{ lesson.name }}</h4>
+        <p>Student: {{ lesson.student_set.first.full_name }}</p>
+    <!--Unbooked Lessons-->
+      {% endif %}
+    {% endfor %}
+
+    <hr>
+
+    <!--All Lessons-->
+    <h3>All Lessons</h3>
     {% for lesson in lessons %}
       <h4>{{ lesson.name }}</h4>
       <ul>
