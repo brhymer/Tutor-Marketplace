@@ -163,6 +163,22 @@ def delete_lesson(request, lesson_id):
     return redirect('teacher_profile', teacher_id=teacher_id)
 
 
+# Book a Lesson
+def make_booking(request, lesson_id):
+    # add the lesson to student's lessons
+    # get the lesson from the database
+    lesson = Lesson.objects.get(id=lesson_id)
+    # get the student from currently logged in user
+    user = request.user
+    student = user.student_set.first()
+    # TODO: check that user is actually a student
+    # add lesson to student's lessons
+    student.lesson.add(lesson)
+    # make sure only one student can book the lesson?
+    # redirect to student's profile page
+    return redirect('student_profile', student_id=student.id)
+
+
 # ==== LANGUAGE VIEWS
 # Language Index View
 def language_index(request):
