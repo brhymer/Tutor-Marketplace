@@ -101,25 +101,31 @@ def lesson_index(request, language_id):
 def new_lesson(request):
     # get current logged in user
     user = request.user
-    # get teacher id from current user
-    # TODO: check that user is actually teacher
-    teacher_id = user.teacher_set.first().id
-    # get teacher from database
-    teacher = Teacher.objects.get(id=teacher_id)
-    if request.method == 'POST':
-        form = LessonForm(request.POST)
-        if form.is_valid():
-            lesson = form.save()
-            # save the teacher to newly made lesson
-            lesson.teacher = teacher
-            lesson.save()
-        # redirect to teacher's profile
-        return redirect('teacher_profile', teacher_id=teacher_id)
+    # check if user is a teacher
+    if user.teacher_set.count() != 0:
+        # get teacher id from current user
+        teacher_id = user.teacher_set.first().id
+        # get teacher from database
+        teacher = Teacher.objects.get(id=teacher_id)
+        if request.method == 'POST':
+            form = LessonForm(request.POST)
+            if form.is_valid():
+                lesson = form.save()
+                # save the teacher to newly made lesson
+                lesson.teacher = teacher
+                lesson.save()
+            # redirect to teacher's profile
+            return redirect('teacher_profile', teacher_id=teacher_id)
+        else:
+            form = LessonForm()
+            template = 'lessons/new.html'
+            context = { 'form': form }
+            return render(request, template, context)
     else:
-        form = LessonForm()
-        template = 'lessons/new.html'
-        context = { 'form': form }
-        return render(request, template, context)
+        # user is a teacher, doesn't have permissions
+        student_id = user.student_set.first().id
+        # redirect to student's profile page
+        return redirect('student_profile', student_id=student_id)
 
 
 # ==== LANGUAGE VIEWS
