@@ -7,7 +7,9 @@
 <h3>Lessons</h3>
 {% for lesson in lessons %}
 <p>{{lesson.name}} &nbsp;
-<input type="btn" class="btn btn-danger" action="submit" value="Book this class"></p> 
+  <a href="{% url 'make_booking' lesson.id %}">
+    <input type="submit" class="btn btn-danger" value="Book this class"></p> 
+  </a>
 {% endfor %}
 
 {% endblock %}
