@@ -17,19 +17,25 @@
   
   <div class="container">
     {% for language in languages %}
-    <h3>{{ language.name }}</h3>
+    <h3>{{ language.name }}</h3> <span><a href="{% url 'teachers_filtered' language.id %}">View More Teachers</a></span>
     <div class="row">
-      {% for i in range %}
-      {% if i <= language.teacher_set.count %}
-      <div class="col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">Teacher Name</div>
-          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
-              style="width:100%" alt="Image"></div>
-          <div class="panel-footer">Book Now!</div>
+      <!--Display 4 newest teachers in this language-->
+      {% for teacher in language.teacher_set.all|slice:":4" %}
+        <div class="col-md-3">
+          <div class="card">
+            <!--Make entire card a link-->
+            <a href="{% url 'teacher_details' teacher.id %}">
+            <div class="card-body">
+              <!--Teacher Name-->
+              <div class="card-title">{{ teacher.full_name }}</div>
+              <!--Teacher Image-->
+              <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%"
+                  alt="Image"></div>
+              <div class="panel-footer">Book Now!</div>
+            </div>
+            </a>
+          </div>
         </div>
-      </div>
-      {% endif %}
       {% endfor %}
     </div>
     {% endfor %}
