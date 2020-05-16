@@ -19,17 +19,16 @@
     {% for language in languages %}
     <h3>{{ language.name }}</h3>
     <div class="row">
-      {% for i in range %}
-      {% if i <= language.teacher_set.count %}
-      <div class="col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">Teacher Name</div>
-          <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
-              style="width:100%" alt="Image"></div>
-          <div class="panel-footer">Book Now!</div>
+      <!--Display 4 newest teachers in this language-->
+      {% for teacher in language.teacher_set.all|slice:":4" %}
+        <div class="col-md-3">
+          <div class="panel panel-primary">
+            <div class="panel-heading">{{ teacher.full_name }}</div>
+            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive"
+                style="width:100%" alt="Image"></div>
+            <div class="panel-footer">Book Now!</div>
+          </div>
         </div>
-      </div>
-      {% endif %}
       {% endfor %}
     </div>
     {% endfor %}
