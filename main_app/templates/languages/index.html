@@ -6,19 +6,30 @@
 {% if languages.count %}
   {% for language in languages.all %}
     <div class="card w-50">
-      <a href="{% url 'teachers_filtered' language.id %}">
       <div class="card-body">
         <h3 class="card-title">{{ language.name }}</h3>
-        <h4 class="card-subtitle">{{ language.teacher_set.count }} 
-          {% if language.teacher_set.count == 1 %}
-            Teacher
+        <!--Link to Teachers-->
+        <a href="{% url 'teachers_filtered' language.id %}">
+          <h4 class="card-subtitle">{{ language.teacher_set.count }} 
+            {% if language.teacher_set.count == 1 %}
+              Teacher
+            {% else %}
+              Teachers
+            {% endif %}
+          </h4>
+        </a>
+        <!--Link to Lessons-->
+        <a href="{% url 'lesson_index' language.id %}">
+          <h4 class="card-subtitle">{{ language.lesson_set.count }}
+          {% if language.lesson_set.count == 1 %}
+            Lesson
           {% else %}
-            Teachers
+            Lessons
           {% endif %}
         </h4>
+        </a>
       </div>
     </div>
-  </a>
   {% endfor %}
 {% else %}
   <h3>No Languages</h3>
