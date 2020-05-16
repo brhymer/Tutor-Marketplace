@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Language, Student, Teacher, Lesson
-from .forms import LessonForm
+from .forms import LessonForm, TeacherForm
 
 # Auth
 from django.contrib.auth.forms import UserCreationForm
@@ -72,6 +72,27 @@ def teacher_details(request, teacher_id):
         'lessons': lessons,
     }
     return render(request, template, context)
+
+# Edit Teacher Public Profile
+def teacher_edit(request, teacher_id):
+    # get teacher from the database
+    teacher = Teacher.objects.get(id=teacher_id)
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, instance=teacher)
+        # update exisiting teacher
+        if form.is_valid():
+            teacher = form.save()
+            return redirect('teacher_details', teacher_id=teacher.id)
+    else:
+        # send a form pre-populated with teacher's values
+        form = TeacherForm(instance=teacher)
+        template = 'teachers/edit.html'
+        context = {
+            'form': form,
+            'teacher': teacher,
+        }
+        return render(request, template, context)
+
 
 def teachers_filtered(request, language_id):
     # get all teachers for the given language
