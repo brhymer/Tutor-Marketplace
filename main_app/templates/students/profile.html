@@ -5,12 +5,17 @@
 
 <h3>{{ student.full_name }}</h3>
 <!--Display lessons-->
+<br/>
 {% if student.lesson.count %}
   {% for lesson in student.lesson.all %}
     <!--Display lesson information-->
     <h4>{{ lesson.name }}</h4>
-    <h4>Time:</h4> {{ lesson.time }}
-    <h4>Price:</h4> ${{ lesson.price }}
+    <h5>Teacher: {{ lesson.teacher.full_name }} </h5>
+    <h5>Time: {{ lesson.time }} </h5>
+    <h5>Price: ${{ lesson.price }} </h5>
+    <!--Cancel Lesson Link-->
+    <a href="{% url 'cancel_booking' lesson.id %}">Cancel Lesson</a>
+    <hr>
   {% endfor %}
 {% else %}
   <h4>No Lessons</h4>

@@ -8,10 +8,14 @@
   {% for lesson in lessons %}
     <div>    
         <h3>{{ lesson.name }}</h3>
-        <h5>Time: {{lesson.time}}  Price: {{lesson.price}}</h5>
-        
+        <h5>Teacher: {{ lesson.teacher.full_name }}</h5>
+        <h5>Time: {{lesson.time}}</h5>
+        <h5>Price: {{lesson.price}}</h5>
+        <a href="{% url 'make_booking' lesson.id %}">
+          <input type="submit" class="btn btn-danger" value="Book this class"></p> 
+        </a>
+        <hr>
     </div>
-
   {% endfor %}
 {% else %}
   <h3>No lessons</h3>
