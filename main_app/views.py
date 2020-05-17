@@ -282,6 +282,14 @@ def signup(request):
                 return redirect('teacher_edit', user.teacher_set.first().id)
             else:
                 return redirect('language_index')
+        else:
+            form = UserCreationForm()
+            error_message = 'Error, Please Try Again'
+            context = {
+                'error': error_message,
+                'form': form,
+            }
+            return render(request, 'registration/signup.html', context)
     else:
         form = UserCreationForm()
         context = {
