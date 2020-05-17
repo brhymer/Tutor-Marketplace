@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Language, Student, Teacher, Lesson
 from .forms import LessonForm, TeacherForm
 
@@ -170,11 +171,18 @@ def make_booking(request, lesson_id):
     lesson = Lesson.objects.get(id=lesson_id)
     # get the student from currently logged in user
     user = request.user
+    # if user is not a student
+    if user.student_set.count() == 0:
+        # display an error message on the same page
+        messages.error(request, 'Only students can book lessons')
+        # redirect back to page that booking was initiated
+        return redirect(request.META['HTTP_REFERER'])
     student = user.student_set.first()
-    # TODO: check that user is actually a student
     # add lesson to student's lessons
     student.lesson.add(lesson)
     # make sure only one student can book the lesson?
+    # give confirmation message
+    messages.success(request, 'Booking made!')
     # redirect to student's profile page
     return redirect('student_profile', student_id=student.id)
     
