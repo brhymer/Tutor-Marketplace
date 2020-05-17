@@ -11,9 +11,15 @@
         <h5>Teacher: {{ lesson.teacher.full_name }}</h5>
         <h5>Time: {{lesson.time}}</h5>
         <h5>Price: {{lesson.price}}</h5>
-        <a href="{% url 'make_booking' lesson.id %}">
-          <input type="submit" class="btn btn-danger" value="Book this class"></p> 
-        </a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'make_booking' lesson.id %}">
+            <input type="submit" class="btn btn-danger" value="Book this class"> 
+          </a>
+        {% else %}
+          <a href="{% url 'signup' %}">
+            <input type="submit" class="btn btn-danger" value="Register to Book!"> 
+          </a>
+        {% endif %}
         <hr>
     </div>
   {% endfor %}
