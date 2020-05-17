@@ -7,9 +7,15 @@
 <h3>Lessons</h3>
 {% for lesson in lessons %}
 <p>{{lesson.name}} &nbsp;
+  {% if user.is_authenticated %}
   <a href="{% url 'make_booking' lesson.id %}">
     <input type="submit" class="btn btn-danger" value="Book this class"></p> 
   </a>
+  {% else %}
+  <a href="{% url 'signup' %}">
+    <input type="submit" class="btn btn-danger" value="Register to Book!"></p> 
+  </a>
+  {% endif %}
 {% endfor %}
 
 {% endblock %}
