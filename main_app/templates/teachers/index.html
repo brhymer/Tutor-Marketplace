@@ -8,7 +8,7 @@
     <p>Language: {{ teacher.language }}</p>
     <p>{{ teacher.bio }}</p>
     <a href="{% url 'teacher_details' teacher.id %}">View</a>
-
+    
   {% endfor %}
 {% else %}
   <h3>No Teachers</h3>
