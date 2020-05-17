@@ -54,11 +54,22 @@ def teacher_index(request):
 def teacher_profile(request, teacher_id):
     # get teacher from database by id
     teacher = Teacher.objects.get(id=teacher_id)
+    # get lessons linked to teacher
     lessons = Lesson.objects.filter(teacher_id=teacher_id)
+    # get unique students of teacher
+    # find lessons with distinct students, returns list of lessons
+    distinct_lessons = lessons.distinct('student')
+    students = []
+    for lesson in distinct_lessons:
+        # get student from lesson
+        student = lesson.student_set.first()
+        students.append(student)
+
     template = 'teachers/profile.html'
     context = {
         'teacher': teacher,
         'lessons': lessons,
+        'students': students,
     }
     return render(request, template, context)
 
@@ -146,8 +157,10 @@ def new_lesson(request):
             context = { 'form': form }
             return render(request, template, context)
     else:
-        # user is a teacher, doesn't have permissions
+        # user is a student, doesn't have permissions
         student_id = user.student_set.first().id
+        # give error message
+        messages.error(request, 'Only teachers can make lessons')
         # redirect to student's profile page
         return redirect('student_profile', student_id=student_id)
 
@@ -195,6 +208,8 @@ def cancel_booking(request, lesson_id):
     student = user.student_set.first()
     # remove lesson from student's lesson, but don't delete lesson
     student.lesson.remove(lesson)
+    # give confirmation message
+    messages.success(request, 'Booking canceled')
     # redirect to student's profile
     return redirect('student_profile', student_id=student.id)
     # TODO: teacher's version of cancel? maybe?
@@ -231,8 +246,11 @@ def signup(request):
                 user.teacher_set.create(full_name=form_full_name)
             user.save()
             login(request, user)
-            # TODO: redirect teachers to fill out their bio
-            return redirect('language_index')
+            # redirect teachers to fill out their bio
+            if user.teacher_set.count():
+                return redirect('teacher_edit', user.teacher_set.first().id)
+            else:
+                return redirect('language_index')
     else:
         form = UserCreationForm()
         context = {
