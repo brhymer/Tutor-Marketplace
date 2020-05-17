@@ -3,17 +3,21 @@
 
 <h1>Teacher Profile Page</h1>
 <h2>{{ teacher.full_name }}</h2>
-<p>{{ teacher.language }}</p>
-<p>{{ teacher.bio }}</p>
+<p>Language: {{ teacher.language }}</p>
+<p>Bio: {{ teacher.bio }}</p>
 
 <!--Edit Public Profile Link-->
 <a href="{% url 'teacher_edit' teacher.id %}">Edit Public Profile</a>
+<br/>
+<!--View Public Profile-->
+<a href="{% url 'teacher_details' teacher.id %}">View Public Profile</a>
+<hr>
 
 <!--Display Students-->
 <h3>Current Students</h3>
-{% if teacher.student.count %}
+{% if students %}
   <ul>
-    {% for student in teacher.student.all %}
+    {% for student in students %}
       <li>{{ student.full_name }}</li>
     {% endfor %}
   </ul>
