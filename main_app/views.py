@@ -6,7 +6,20 @@ from .forms import LessonForm, TeacherForm
 # Auth
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
+
+# Decorators
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+
+# User Permission Tests
+def user_is_student(user):
+    return user.student_set.count() != 0
+
+def user_is_teacher(user):
+    return user.teacher_set.count() != 0
+
+
+# Home Views
 
 def home(request):
     # get all languages from database
@@ -27,6 +40,8 @@ def about(request):
 
 # ==== STUDENT VIEWS
 # Student Private Profile
+@login_required
+@user_passes_test(user_is_student)
 def student_profile(request, student_id):
     # get student from database by id
     student = Student.objects.get(id=student_id)
@@ -51,6 +66,8 @@ def teacher_index(request):
     return render(request, template, context)
 
 # Teacher Private Profile
+@login_required
+@user_passes_test(user_is_teacher)
 def teacher_profile(request, teacher_id):
     # get teacher from database by id
     teacher = Teacher.objects.get(id=teacher_id)
@@ -64,7 +81,7 @@ def teacher_profile(request, teacher_id):
         # get student from lesson
         student = lesson.student_set.first()
         students.append(student)
-
+    # if no students, returns students = [None]
     template = 'teachers/profile.html'
     context = {
         'teacher': teacher,
@@ -86,6 +103,8 @@ def teacher_details(request, teacher_id):
     return render(request, template, context)
 
 # Edit Teacher Public Profile
+@login_required
+@user_passes_test(user_is_teacher)
 def teacher_edit(request, teacher_id):
     # get teacher from the database
     teacher = Teacher.objects.get(id=teacher_id)
@@ -131,6 +150,8 @@ def lesson_index(request, language_id):
     return render(request, template, context)
 
 # NEW Lesson
+@login_required
+@user_passes_test(user_is_teacher)
 def new_lesson(request):
     # get current logged in user
     user = request.user
@@ -165,7 +186,10 @@ def new_lesson(request):
         return redirect('student_profile', student_id=student_id)
 
 # Delete Lesson
+@login_required
+@user_passes_test(user_is_teacher)
 def delete_lesson(request, lesson_id):
+    # TODO: only let teacher delete their own lesson
     # get lesson to delete from database
     lesson = Lesson.objects.get(id=lesson_id)
     # delete from database
@@ -184,22 +208,29 @@ def make_booking(request, lesson_id):
     lesson = Lesson.objects.get(id=lesson_id)
     # get the student from currently logged in user
     user = request.user
-    # if user is not a student
-    if user.student_set.count() == 0:
-        # display an error message on the same page
-        messages.error(request, 'Only students can book lessons')
-        # redirect back to page that booking was initiated
-        return redirect(request.META['HTTP_REFERER'])
-    student = user.student_set.first()
-    # add lesson to student's lessons
-    student.lesson.add(lesson)
-    # make sure only one student can book the lesson?
-    # give confirmation message
-    messages.success(request, 'Booking made!')
-    # redirect to student's profile page
-    return redirect('student_profile', student_id=student.id)
+    # if user is registered and logged in
+    if user.is_authenticated:
+        # if user is not a student
+        if user.student_set.count() == 0:
+            # display an error message on the same page
+            messages.error(request, 'Only students can book lessons')
+            # redirect back to page that booking was initiated
+            return redirect(request.META['HTTP_REFERER'])
+        student = user.student_set.first()
+        # add lesson to student's lessons
+        student.lesson.add(lesson)
+        # make sure only one student can book the lesson?
+        # give confirmation message
+        messages.success(request, 'Booking made!')
+        # redirect to student's profile page
+        return redirect('student_profile', student_id=student.id)
+    # if user is not registered or logged in
+    else:
+        messages.error(request, 'Only registered users can book lessons. Please log in or sign up')
+        return redirect('login')
     
 # Cancel a Lesson
+@login_required
 def cancel_booking(request, lesson_id):
     # get lesson from database
     lesson = Lesson.objects.get(id=lesson_id)
