@@ -15,7 +15,7 @@
 
 <!--Display Students-->
 <h3>Current Students</h3>
-{% if students %}
+{% if students.0 != None %}
   <ul>
     {% for student in students %}
       <li>{{ student.full_name }}</li>
