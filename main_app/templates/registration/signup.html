@@ -3,8 +3,8 @@
 
 <h1>Sign Up</h1>
 
-{% if error_message %}
-<p style="color: red">{{ error_message }}</p>
+{% if error %}
+  <h4 class="error-message">{{ error }}</h4>
 {% endif %}
 
 <form method="post" action="{% url 'signup' %}">
