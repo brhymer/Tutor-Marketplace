@@ -76,13 +76,11 @@ def teacher_profile(request, teacher_id):
     # get unique students of teacher
     # find lessons with distinct students, returns list of lessons
     distinct_lessons = lessons.filter(student__isnull=False).distinct('student')
-    print(distinct_lessons)
     students = []
     for lesson in distinct_lessons:
         # get student from lesson
         student = lesson.student_set.first()
         students.append(student)
-    print(students)
     # if no students, returns students = [None]
     template = 'teachers/profile.html'
     context = {
