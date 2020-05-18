@@ -28,32 +28,65 @@
 
 <!--Display Lessons-->
 
-{% if lessons.count %}
-    <!--Booked Upcoming Lessons-->
-    <h3>Booked Lessons</h3>
-    {% for lesson in lessons %}
-      {% if lesson.student_set.count != 0 %}
-        <h4>Lesson name: {{ lesson.name }}</h4>
-        <p>Student: {{ lesson.student_set.first.full_name }}</p>
-    <!--Unbooked Lessons-->
-      {% endif %}
-    {% endfor %}
+
+  <!--Booked Upcoming Lessons-->
+  {% if lessons.count %}
+
+    <table class ="table">
+      <thead>  <h3>Booked Lessons</h3>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Time</th>
+          <th scope="col">Price</th>
+          <th scope="col">Booked by</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lesson in lessons %}
+          {% if lesson.student_set.count != 0 %}
+            <tr>
+              <th scope ="row">{{lesson.name}}</th>
+              <td>{{lesson.time}}</td>
+              <td>{{lesson.price}}</td>
+              <td>Student: {{ lesson.student_set.first.full_name }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
 
     <hr>
+    {% else %}
+    <h4>No Lessons Have Been Booked</h4>
+  {% endif %}
+  
 
-    <!--All Lessons-->
-    <h3>All Lessons</h3>
-    {% for lesson in lessons %}
-      <h4>{{ lesson.name }}</h4>
-      <ul>
-        <li>${{ lesson.price }}</li>
-        <li>{{ lesson.time }}</li>
-      </ul>
-      <!--Delete Lesson Link-->
-      <a href="{% url 'delete_lesson' lesson.id %}">Delete Lesson</a>
-    {% endfor %}
+    <!--Unbooked lessons-->
+{% if unbooked_lessons %}
+  <table class ="table">
+    <thead><h3>Lessons not yet booked</h3>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Time</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for lesson in unbooked_lessons %}
+    <tr>
+      <th scope ="row">{{lesson.name}}</th>
+      <td>{{lesson.time}}</td>
+      <td>{{lesson.price}}</td>
+      <td><a href="{% url 'delete_lesson' lesson.id %}">Delete Lesson</a></td>
+    </tr>
+  {% endfor %}
+</tbody>
+</table>
+      
+
 {% else %}
-  <h4>No Lessons</h4>
+  <h4>No Unbooked Lessons Exist</h4>
 {% endif %}
 
 {% endblock %}
