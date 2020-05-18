@@ -3,9 +3,11 @@
 
 <h1>Languages Index</h1>
 <!--display all languages-->
+<div class="row">
 {% if languages.count %}
   {% for language in languages.all %}
-    <div class="card w-50">
+  <div class="col-sm-6">
+    <div class="card text-center">
       <div class="card-body">
         <h3 class="card-title">{{ language.name }}</h3>
         <!--Link to Teachers-->
@@ -30,9 +32,12 @@
         </a>
       </div>
     </div>
+  </div>
   {% endfor %}
 {% else %}
   <h3>No Languages</h3>
 {% endif %}
+
+</div>
 
 {% endblock %}
