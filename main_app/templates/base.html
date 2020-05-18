@@ -28,14 +28,11 @@
 
         <nav class="navbar fixed-top navbar-expand-md navbar-inverse bg-light">
           <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="{% url 'home' %}">Tutor Marketplace</a>
-
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"               aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-            </div>
-            <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
+            <a class="navbar-brand" href="{% url 'home' %}">Tutor Marketplace</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"               aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ml-auto" id="navbarCollapse">
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="{% url 'language_index' %}">Languages</a></li>
                 <!--Student Links-->
