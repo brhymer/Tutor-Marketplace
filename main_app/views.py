@@ -25,12 +25,8 @@ def home(request):
     # get all languages from database
     languages = Language.objects.all()
     template = 'home.html'
-    # define a range to loop over in the template
-    # use to show 4 teachers in each language
-    loop_range = range(0, 4)
     context = {
         'languages': languages,
-        'range': loop_range,
     }
     return render(request, template, context)
 
@@ -75,7 +71,7 @@ def teacher_profile(request, teacher_id):
     lessons = Lesson.objects.filter(teacher_id=teacher_id)
     # get unique students of teacher
     # find lessons with distinct students, returns list of lessons
-    distinct_lessons = lessons.distinct('student')
+    distinct_lessons = lessons.filter(student__isnull=False).distinct('student')
     students = []
     for lesson in distinct_lessons:
         # get student from lesson
