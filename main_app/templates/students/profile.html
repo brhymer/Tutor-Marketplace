@@ -7,17 +7,30 @@
 <!--Display lessons-->
 <br/>
 {% if student.lesson.count %}
+<div class="row">
   {% for lesson in student.lesson.all %}
     <!--Display lesson information-->
-    <h4>{{ lesson.name }}</h4>
-    <h5>Language: {{ lesson.language }}</h5>
-    <h5>Teacher: {{ lesson.teacher.full_name }} </h5>
-    <h5>Time: {{ lesson.time }} </h5>
-    <h5>Price: ${{ lesson.price }} </h5>
-    <!--Cancel Lesson Link-->
-    <a href="{% url 'cancel_booking' lesson.id %}">Cancel Lesson</a>
-    <hr>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <h4>{{ lesson.name }}</h4>
+          </div>
+          <div class="card-text">
+            <h5>Language: {{ lesson.language }}</h5>
+            <h5>Teacher: {{ lesson.teacher.full_name }} </h5>
+            <h5>Time: {{ lesson.time }} </h5>
+            <h5>Price: ${{ lesson.price }} </h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <!--Cancel Lesson Link-->
+          <a href="{% url 'cancel_booking' lesson.id %}"><button class="btn btn-danger">Cancel Lesson</button></a>
+        </div>
+      </div>
+    </div>
   {% endfor %}
+</div>
 {% else %}
   <h4>No Lessons</h4>
 {% endif %}
