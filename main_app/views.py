@@ -69,6 +69,7 @@ def teacher_profile(request, teacher_id):
     teacher = Teacher.objects.get(id=teacher_id)
     # get lessons linked to teacher
     lessons = Lesson.objects.filter(teacher_id=teacher_id)
+    unbooked_lessons = lessons.filter(student__isnull=True)
     # get unique students of teacher
     # find lessons with distinct students, returns list of lessons
     distinct_lessons = lessons.filter(student__isnull=False).distinct('student')
@@ -83,6 +84,7 @@ def teacher_profile(request, teacher_id):
         'teacher': teacher,
         'lessons': lessons,
         'students': students,
+        'unbooked_lessons': unbooked_lessons,
     }
     return render(request, template, context)
 
