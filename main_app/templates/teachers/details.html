@@ -6,17 +6,36 @@
 <p>{{ teacher.bio }}</p>
 <h3>{{ teacher.language }} Lessons</h3>
 {% if lessons.count %}
-  {% for lesson in lessons %}
-  <p>{{lesson.name}} &nbsp;
-    {% if user.is_authenticated %}
-    <a href="{% url 'make_booking' lesson.id %}">
-      <input type="submit" class="btn btn-danger" value="Book this class"></p> 
-    </a>
-    {% else %}
-    <a href="{% url 'signup' %}">
-      <input type="submit" class="btn btn-danger" value="Register to Book!"></p> 
-    </a>
-    {% endif %}
+
+  <table class ="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Time</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for lesson in lessons %}
+      <tr>
+        <th scope ="row">{{lesson.name}}</th>
+        <td>{{lesson.time}}</td>
+        <td>{{lesson.price}}</td>
+        <td>
+          {% if user.is_authenticated %}
+          <a href="{% url 'make_booking' lesson.id %}">
+            <input type="submit" class="btn btn-danger" value="Book this class"></p> 
+          </a>
+          {% else %}
+          <a href="{% url 'signup' %}">
+            <input type="submit" class="btn btn-danger" value="Register to Book!"></p> 
+          </a>
+          {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
   {% endfor %}
 {% else %}
   <h5>No Lessons Available</h5>
