@@ -10,6 +10,7 @@
   {% for lesson in student.lesson.all %}
     <!--Display lesson information-->
     <h4>{{ lesson.name }}</h4>
+    <h5>Language: {{ lesson.language }}</h5>
     <h5>Teacher: {{ lesson.teacher.full_name }} </h5>
     <h5>Time: {{ lesson.time }} </h5>
     <h5>Price: ${{ lesson.price }} </h5>

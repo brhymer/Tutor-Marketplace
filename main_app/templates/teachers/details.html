@@ -4,8 +4,8 @@
 <h1>Teacher Details</h1>
 <h2>{{ teacher.full_name }}</h2>
 <p>{{ teacher.bio }}</p>
-<h3>Lessons</h3>
-{% if lesson in lessons.count %}
+<h3>{{ teacher.language }} Lessons</h3>
+{% if lessons.count %}
   {% for lesson in lessons %}
   <p>{{lesson.name}} &nbsp;
     {% if user.is_authenticated %}
