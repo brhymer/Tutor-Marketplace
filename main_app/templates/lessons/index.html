@@ -3,26 +3,37 @@
 
 <h1>Available Lessons in {{language.name}}</h1>
 
-{% if lessons.count %}
 
+{% if lessons.count %}
+<div class="row">
   {% for lesson in lessons %}
-    <div>    
-        <h3>{{ lesson.name }}</h3>
-        <h5>Teacher: {{ lesson.teacher.full_name }}</h5>
-        <h5>Time: {{lesson.time}}</h5>
-        <h5>Price: {{lesson.price}}</h5>
-        {% if user.is_authenticated %}
+    <div class="col-sm-6">    
+      <div class="card">
+        <div class="card-header text-center">
+            <h3>{{ lesson.name }}</h3>
+        </div>
+        <div class="card-body">
+          <div class="card-text">
+            <h5>Teacher: {{ lesson.teacher.full_name }}</h5>
+            <h5>Time: {{lesson.time}}</h5>
+            <h5>Price: ${{lesson.price}}</h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          {% if user.is_authenticated %}
           <a href="{% url 'make_booking' lesson.id %}">
-            <input type="submit" class="btn btn-danger" value="Book this class"> 
+            <input type="submit" class="btn btn-danger" value="Book this class">
           </a>
-        {% else %}
+          {% else %}
           <a href="{% url 'signup' %}">
-            <input type="submit" class="btn btn-danger" value="Register to Book!"> 
+            <input type="submit" class="btn btn-danger" value="Register to Book!">
           </a>
-        {% endif %}
-        <hr>
+          {% endif %}
+        </div>
+      </div>
     </div>
   {% endfor %}
+</div>
 {% else %}
   <h3>No lessons</h3>
 {% endif %}
