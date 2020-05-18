@@ -10,3 +10,12 @@ body {
   font-weight: 900;
   color: #FF000080;
 }
+
+.card {
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.card-header {
+  padding-bottom: 3px;
+}
