@@ -257,6 +257,17 @@ def language_index(request):
     # render template
     return render(request, template, context)
 
+def search(request):
+    query = request.GET['query']
+    # get all languages from database
+    languages = Language.objects.filter(name__icontains=query)
+    template = 'search.html'
+    context = {
+        'languages': languages,
+    }
+    # render template
+    return render(request, template, context)
+
 
 # ====AUTH VIEWS
 # Signup

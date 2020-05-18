@@ -10,9 +10,9 @@
     </div>
     <!--TODO: fill out action and method-->
     <div>
-      <form class="form-group" action="#"> Search for Teachers by Language:
-        <input type="text" class="form-control" size="50" placeholder="ex. English">
-        <button type="button" class="btn btn-danger">Search</button>
+      <form class="form-group" action="{% url 'search'%}"> Search for Teachers by Language:
+        <input type="text" name="query" class="form-control" size="50" placeholder="ex. English">
+        <button type="submit" class="btn btn-danger">Search</button>
       </form>
     </div>
   

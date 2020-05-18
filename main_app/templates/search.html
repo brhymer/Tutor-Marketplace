@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Search Results</h1>
+<!--display all languages-->
+<div class="row">
+{% if languages.count %}
+  {% for language in languages.all %}
+  <div class="col-sm-6">
+    <div class="card text-center">
+      <div class="card-body">
+        <h3 class="card-title">{{ language.name }}</h3>
+        <!--Link to Teachers-->
+        <a href="{% url 'teachers_filtered' language.id %}">
+          <h4 class="card-subtitle">{{ language.teacher_set.count }} 
+            {% if language.teacher_set.count == 1 %}
+              Teacher
+            {% else %}
+              Teachers
+            {% endif %}
+          </h4>
+        </a>
+        <!--Link to Lessons-->
+        <a href="{% url 'lesson_index' language.id %}">
+          <h4 class="card-subtitle">{{ language.get_lessons_without_students_count }}
+          {% if language.get_lessons_without_students_count == 1 %}
+            Lesson
+          {% else %}
+            Lessons
+          {% endif %}
+        </h4>
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+  <h3>No Languages</h3>
+{% endif %}
+
+</div>
+
+{% endblock %}
