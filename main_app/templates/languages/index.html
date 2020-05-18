@@ -20,8 +20,8 @@
         </a>
         <!--Link to Lessons-->
         <a href="{% url 'lesson_index' language.id %}">
-          <h4 class="card-subtitle">{{ language.lesson_set.count }}
-          {% if language.lesson_set.count == 1 %}
+          <h4 class="card-subtitle">{{ language.get_lessons_without_students_count }}
+          {% if language.get_lessons_without_students_count == 1 %}
             Lesson
           {% else %}
             Lessons

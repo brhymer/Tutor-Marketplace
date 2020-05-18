@@ -16,6 +16,9 @@ class Language(models.Model):
     def __str__(self):
         return self.name
 
+    def get_lessons_without_students_count(self):
+      return self.lesson_set.filter(student__isnull=True).count()
+
 
 
 class Teacher(models.Model):
