@@ -4,10 +4,31 @@
 <h1>Teachers Index</h1>
 {% if teachers.count %}
   {% for teacher in teachers %}
-    <h3>{{ teacher.full_name }}</h3>
-    <p>Language: {{ teacher.language }}</p>
-    <p>{{ teacher.bio }}</p>
-    <a href="{% url 'teacher_details' teacher.id %}">View</a>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="row no-gutters align-items-center">
+          <div class="col-sm-4">
+            <img src="https://placehold.it/150x80?text=IMAGE" alt="" class="card-img">
+          </div>
+          <div class="col-sm-5">
+            <div class="card-body">
+              <div class="card-title">
+                <h3>{{ teacher.full_name }}</h3>
+              </div>
+              <div class="card-text">
+                <p>Language: {{ teacher.language }}</p>
+                <p>{{ teacher.bio }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 justify-content-center text-center">
+            <a href="{% url 'teacher_details' teacher.id %}"><button class="btn btn-danger">View</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     
   {% endfor %}
 {% else %}
