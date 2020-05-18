@@ -95,10 +95,12 @@ def teacher_details(request, teacher_id):
     # get teacher by id
     teacher = Teacher.objects.get(id=teacher_id)
     lessons = Lesson.objects.filter(teacher_id=teacher_id)
+    # only show lessons that have not been booked by a student
+    lessons_without_students = lessons.filter(student__isnull=True)
     template = 'teachers/details.html'
     context = {
         'teacher': teacher,
-        'lessons': lessons,
+        'lessons': lessons_without_students,
     }
     return render(request, template, context)
 
@@ -142,9 +144,11 @@ def lesson_index(request, language_id):
     # get all lessons in the given language
     language = Language.objects.get(id=language_id)
     lessons = Lesson.objects.filter(language_id=language_id)
+    # only show lessons that have not been booked by a student
+    lessons_without_students = lessons.filter(student__isnull=True)
     template = 'lessons/index.html'
     context = {
-        'lessons': lessons,
+        'lessons': lessons_without_students,
         'language': language,
     }
     return render(request, template, context)
@@ -167,7 +171,7 @@ def new_lesson(request):
                 lesson = form.save()
                 # save the teacher to newly made lesson
                 lesson.teacher = teacher
-                # TODO: save language to lesson
+                # save language to lesson
                 lesson.language = teacher.language
                 lesson.save()
             # redirect to teacher's profile
@@ -203,10 +207,8 @@ def delete_lesson(request, lesson_id):
 
 # Book a Lesson
 def make_booking(request, lesson_id):
-    # add the lesson to student's lessons
     # get the lesson from the database
     lesson = Lesson.objects.get(id=lesson_id)
-    # get the student from currently logged in user
     user = request.user
     # if user is registered and logged in
     if user.is_authenticated:
@@ -219,7 +221,6 @@ def make_booking(request, lesson_id):
         student = user.student_set.first()
         # add lesson to student's lessons
         student.lesson.add(lesson)
-        # make sure only one student can book the lesson?
         # give confirmation message
         messages.success(request, 'Booking made!')
         # redirect to student's profile page
