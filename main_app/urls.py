@@ -43,6 +43,7 @@ urlpatterns = [
 
   # === Language URLs
   path('languages/', views.language_index, name='language_index'),
+  path('search/', views.search, name ='search'),
 
 
   # === Auth URLs
